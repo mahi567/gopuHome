@@ -26,10 +26,10 @@
     },
     {
       "id": "lodges",
-      "name": "Lodges",
-      "single": "Lodge",
+      "name": "Guest Rooms",
+      "single": "Guest Room",
       "icon": "hotel",
-      "blurb": "Clean, comfortable lodge rooms for short stays, with 24-hour check-in.",
+      "blurb": "Clean, comfortable guest rooms for short stays, with 24-hour check-in.",
       "bestFor": "Travellers & pilgrims"
     }
   ]
