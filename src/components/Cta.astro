@@ -1,0 +1,17 @@
+---
+import Icon from "./Icon.astro";
+import site from "../data/site.json";
+const { title, text } = Astro.props;
+---
+<section class="container cta-wrap">
+  <div class="cta">
+    <div>
+      <h2>{title}</h2>
+      <p>{text}</p>
+    </div>
+    <div class="cta-actions">
+      <a class="btn btn-accent" href={`tel:${site.phoneDial}`}><Icon name="phone" /><span>{site.phoneDisplay}</span></a>
+      <a class="btn btn-light" href={`https://wa.me/${site.whatsapp}?text=${encodeURIComponent("Hi, I have an enquiry about Gopu Home Stay.")}`} target="_blank" rel="noopener"><Icon name="whatsapp" /><span>WhatsApp us</span></a>
+    </div>
+  </div>
+</section>

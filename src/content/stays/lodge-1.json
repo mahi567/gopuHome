@@ -1,0 +1,27 @@
+{
+  "name": "Gopu Lodge 1",
+  "code": "",
+  "type": "lodges",
+  "label": "",
+  "order": 120,
+  "location": "Bengaluru — exact location shared on enquiry",
+  "mapUrl": "",
+  "mapQuery": "Gopu Homestay Bengaluru",
+  "price": "",
+  "rooms": "AC / Non-AC",
+  "capacity": "Single, double & family rooms",
+  "description": "Clean lodge rooms for short stays, with round-the-clock check-in.",
+  "amenities": [
+    "24h check-in",
+    "AC rooms",
+    "Hot water",
+    "Parking",
+    "TV"
+  ],
+  "photos": [
+    {
+      "image": "/images/lodge-1.jpg",
+      "caption": ""
+    }
+  ]
+}

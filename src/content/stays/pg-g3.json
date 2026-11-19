@@ -1,0 +1,51 @@
+{
+  "name": "Gopu Home Stay Colive (G3)",
+  "code": "G3",
+  "type": "hostels",
+  "label": "Co-living PG",
+  "order": 50,
+  "location": "264/265, 2nd Cross Rd, near Manyata Exit 5, P&T Layout, Rachenahalli, Thanisandra, Bengaluru 560077",
+  "mapUrl": "",
+  "mapQuery": "Gopu Home Stay Colive, 2nd Cross Rd, P&T Layout, Rachenahalli, Thanisandra, Bengaluru 560077",
+  "price": "",
+  "googleRating": 4.5,
+  "googleReviews": 15,
+  "rooms": "Co-living PG",
+  "capacity": "Sharing & single rooms",
+  "description": "Co-living PG near Manyata Tech Park Exit 5, handy for people working at Manyata, with a shared dining hall and furnished twin and double rooms. Open 24 hours.",
+  "amenities": [
+    "Dining hall",
+    "Fridge",
+    "Furnished rooms",
+    "Wardrobe",
+    "Study table",
+    "Meals",
+    "Wi-Fi"
+  ],
+  "photos": [
+    {
+      "image": "/images/g3/building.jpg",
+      "caption": "Building"
+    },
+    {
+      "image": "/images/g3/dining.jpg",
+      "caption": "Dining hall"
+    },
+    {
+      "image": "/images/g3/twin-room.jpg",
+      "caption": "Twin sharing room"
+    },
+    {
+      "image": "/images/g3/double-room.jpg",
+      "caption": "Double bed room"
+    },
+    {
+      "image": "/images/g3/corridor.jpg",
+      "caption": "Corridor"
+    },
+    {
+      "image": "/images/g3/corridor-lockers.jpg",
+      "caption": "Corridor with storage"
+    }
+  ]
+}

@@ -1,0 +1,104 @@
+---
+import "../styles/global.css";
+import Icon from "../components/Icon.astro";
+import Logo from "../components/Logo.astro";
+import site from "../data/site.json";
+import { LOGO_SHAPES } from "../lib/icons.js";
+import { TYPES, getStays, staysOfType } from "../lib/stays.js";
+
+const { title, description = site.tagline, page = "", image = "/images/hero.jpg" } = Astro.props;
+const stays = await getStays();
+const nav = [
+  ["home", "/", "Home"],
+  ["about", "/about/", "About Us"],
+  ["services", "/services/", "Services"],
+  ["gallery", "/gallery/", "Gallery"],
+  ["contact", "/contact/", "Contact"],
+];
+const favicon =
+  "data:image/svg+xml," +
+  encodeURIComponent(
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#1c1d1f"/><g color="#d9b25a" transform="translate(6 6) scale(0.8125)">${LOGO_SHAPES}</g></svg>`
+  );
+const ogImage = Astro.site ? new URL(image, Astro.site).href : image;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:type" content="website" />
+    <link rel="icon" type="image/svg+xml" href={favicon} />
+    <!-- Apply the saved theme before the page paints, so there is no flash. -->
+    <script is:inline>
+      try { document.documentElement.dataset.theme = localStorage.getItem("gopu-theme") || "dark"; }
+      catch (e) { document.documentElement.dataset.theme = "dark"; }
+    </script>
+  </head>
+  <body data-page={page} data-whatsapp={site.whatsapp}>
+    <header id="site-header">
+      <div class="container nav">
+        <Logo />
+        <button class="nav-toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+        <nav class="nav-links" aria-label="Main">
+          {nav.map(([id, href, label]) => <a href={href} class:list={{ active: page === id }}>{label}</a>)}
+          <button class="theme-toggle" type="button" aria-label="Switch between light and dark theme" title="Switch theme">
+            <span class="i-sun"><Icon name="sun" /></span><span class="i-moon"><Icon name="moon" /></span>
+            <span class="t-light">Light theme</span><span class="t-dark">Dark theme</span>
+          </button>
+          <a class="btn btn-accent nav-call" href={`tel:${site.phoneDial}`}><Icon name="phone" /><span>{site.phoneDisplay}</span></a>
+        </nav>
+      </div>
+    </header>
+
+    <main><slot /></main>
+
+    <footer id="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <Logo light />
+          <p class="footer-about">{site.tagline}</p>
+        </div>
+        <div>
+          <h4>Our stays</h4>
+          <ul>
+            {TYPES.map((t) => <li><a href={`/stays/?type=${t.id}`}>{t.name} ({staysOfType(stays, t.id).length})</a></li>)}
+          </ul>
+        </div>
+        <div>
+          <h4>Quick links</h4>
+          <ul>
+            {nav.map(([, href, label]) => <li><a href={href}>{label}</a></li>)}
+            <li><a href="/stays/">Stays</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <ul class="footer-contact">
+            <li><Icon name="phone" /><a href={`tel:${site.phoneDial}`}>{site.phoneDisplay}</a></li>
+            <li><Icon name="whatsapp" /><a href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noopener">WhatsApp us</a></li>
+            <li><Icon name="pin" /><span>{site.address}</span></li>
+            <li><Icon name="clock" /><span>{site.hours}</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="container">© {new Date().getFullYear()} {site.name}. All rights reserved.</div>
+      </div>
+      <div class="social social-float">
+        {site.social.instagram && <a href={site.social.instagram} target="_blank" rel="noopener" class="s-ig" aria-label="Instagram" title="Instagram"><Icon name="instagram" /></a>}
+        <a href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noopener" class="s-wa" aria-label="WhatsApp" title="WhatsApp"><Icon name="whatsapp" /></a>
+        <a href={`tel:${site.phoneDial}`} class="s-call" aria-label={`Call ${site.phoneDisplay}`} title={`Call ${site.phoneDisplay}`}><Icon name="phone" /></a>
+      </div>
+    </footer>
+
+    <script>
+      import "../scripts/site.js";
+    </script>
+  </body>
+</html>

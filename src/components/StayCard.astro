@@ -1,0 +1,31 @@
+---
+import Icon from "./Icon.astro";
+import { typeOf, coverOf, badgeOf, ratingOf } from "../lib/stays.js";
+const { stay } = Astro.props;
+const type = typeOf(stay.type);
+const cover = coverOf(stay);
+const { rating, count } = ratingOf(stay);
+---
+<a
+  class="card stay-card"
+  href={`/stays/${stay.id}/`}
+  data-stay={stay.id}
+  data-type={stay.type}
+  data-photos={stay.photos.length > 1 ? JSON.stringify(stay.photos.map((p) => p.image)) : undefined}
+>
+  <div class={`media media-${stay.type}`}>
+    <span class="media-icon"><Icon name={type.icon} /></span>
+    {cover && <img src={cover} alt={stay.name} loading="lazy" onerror="this.remove()" />}
+    <span class="badge">{badgeOf(stay)}</span>
+  </div>
+  <div class="card-body">
+    <h3>{stay.name}</h3>
+    {count && <p class="g-rating"><b>{rating.toFixed(1)}</b><span class="stars" style={`--pct:${(rating / 5) * 100}%`} aria-hidden="true">★★★★★</span><span>({count} on Google)</span></p>}
+    <p class="loc"><Icon name="pin" /><span>{stay.location}</span></p>
+    <p class="meta"><Icon name="users" /><span>{[stay.rooms, stay.capacity].filter(Boolean).join(" · ")}</span></p>
+    <div class="card-foot">
+      <span class="price">{stay.price || "Contact for rates"}</span>
+      <span class="link">View details <Icon name="arrow" /></span>
+    </div>
+  </div>
+</a>

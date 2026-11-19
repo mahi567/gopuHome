@@ -1,0 +1,9 @@
+{
+  "gallery": [
+    { "image": "/images/g3/double-room.jpg", "caption": "Spacious rooms" },
+    { "image": "/images/g1/gym.jpg", "caption": "Gym" },
+    { "image": "/images/g3/dining.jpg", "caption": "Dining hall" },
+    { "image": "/images/g1/games.jpg", "caption": "Games room" },
+    { "image": "/images/g4/twin-room-large.jpg", "caption": "Twin sharing rooms" }
+  ]
+}

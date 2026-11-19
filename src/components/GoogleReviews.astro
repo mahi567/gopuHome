@@ -1,0 +1,38 @@
+---
+// Google ratings, worked out from the "Google rating" and "Number of Google
+// reviews" filled in on each property in the editor. Review text is not copied
+// here: each card links to the property's own Google listing.
+import Icon from "./Icon.astro";
+import { getStays, ratingOf, mapLink } from "../lib/stays.js";
+
+const rated = (await getStays()).map((s) => ({ stay: s, ...ratingOf(s) })).filter((r) => r.count);
+const total = rated.reduce((n, r) => n + r.count, 0);
+const average = total ? rated.reduce((n, r) => n + r.rating * r.count, 0) / total : 0;
+// The three listings with the most reviews.
+const top = [...rated].sort((a, b) => b.count - a.count).slice(0, 3);
+---
+{total > 0 && (
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Google reviews</span>
+        <h2>What residents say about us</h2>
+      </div>
+      <div class="reviews">
+        <div class="review-score card">
+          <b>{average.toFixed(1)}</b>
+          <span class="stars" style={`--pct:${(average / 5) * 100}%`} aria-hidden="true">★★★★★</span>
+          <p>Average of {total} Google reviews across {rated.length} of our properties</p>
+        </div>
+        {top.map(({ stay, rating, count }) => (
+          <a class="review-card card" href={mapLink(stay)} target="_blank" rel="noopener">
+            <h3>{stay.name}</h3>
+            <p class="review-line"><b>{rating.toFixed(1)}</b><span class="stars" style={`--pct:${(rating / 5) * 100}%`} aria-hidden="true">★★★★★</span></p>
+            <p class="review-count">{count} Google review{count === 1 ? "" : "s"}</p>
+            <span class="link">Read reviews on Google <Icon name="arrow" /></span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+)}

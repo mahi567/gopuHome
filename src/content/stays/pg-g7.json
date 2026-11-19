@@ -1,0 +1,56 @@
+{
+  "name": "Gopu's Homestay (G7)",
+  "code": "G7",
+  "type": "hostels",
+  "label": "Co-living PG",
+  "order": 90,
+  "location": "365, 9th Main Rd, Mahbub Nagar, Nagavara, Bengaluru 560045",
+  "mapUrl": "",
+  "mapQuery": "2JP8+R8 Bengaluru, Karnataka",
+  "price": "",
+  "googleRating": 4.9,
+  "googleReviews": 70,
+  "rooms": "Co-living PG",
+  "capacity": "Sharing & single rooms",
+  "description": "Co-living stay on 9th Main Road, Mahbub Nagar, Nagavara, with furnished twin sharing and double bed rooms.",
+  "amenities": [
+    "Gym",
+    "Table tennis & foosball",
+    "Furnished rooms",
+    "Wardrobe",
+    "Study table",
+    "TV in select rooms",
+    "Meals",
+    "Wi-Fi"
+  ],
+  "photos": [
+    {
+      "image": "/images/g7/building.jpg",
+      "caption": "Building"
+    },
+    {
+      "image": "/images/g7/entrance.jpg",
+      "caption": "Entrance"
+    },
+    {
+      "image": "/images/g7/twin-room.jpg",
+      "caption": "Twin sharing room"
+    },
+    {
+      "image": "/images/g7/twin-room-tv.jpg",
+      "caption": "Twin room with TV"
+    },
+    {
+      "image": "/images/g7/double-room.jpg",
+      "caption": "Double bed room"
+    },
+    {
+      "image": "/images/g1/gym.jpg",
+      "caption": "Gym"
+    },
+    {
+      "image": "/images/g1/games.jpg",
+      "caption": "Games room"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "name": "Gopu Homestay Ladies PG (G6)",
+  "code": "G6",
+  "type": "hostels",
+  "label": "Ladies PG",
+  "order": 80,
+  "location": "124, 1st D Cross Rd, East of NGEF Layout, Kasturi Nagar, Bengaluru 560043",
+  "mapUrl": "https://www.google.com/maps/search/?api=1&query=13.001722,77.660972",
+  "mapQuery": "",
+  "price": "",
+  "googleRating": 4.5,
+  "googleReviews": 2,
+  "rooms": "Ladies only",
+  "capacity": "Sharing & single rooms",
+  "description": "Our ladies-only PG in Kasturi Nagar, East of NGEF Layout, for students and working women, with furnished twin rooms, a dining area with self kitchen, and laundry.",
+  "amenities": [
+    "Ladies only",
+    "Self kitchen",
+    "Dining area",
+    "Washing machines",
+    "Wardrobe",
+    "Study table",
+    "Meals",
+    "Wi-Fi"
+  ],
+  "photos": [
+    {
+      "image": "/images/g6/entrance.jpg",
+      "caption": "Entrance"
+    },
+    {
+      "image": "/images/g6/building.jpg",
+      "caption": "Building"
+    },
+    {
+      "image": "/images/g6/twin-room-1.jpg",
+      "caption": "Twin sharing room"
+    },
+    {
+      "image": "/images/g6/twin-room-2.jpg",
+      "caption": "Twin room"
+    },
+    {
+      "image": "/images/g6/dining.jpg",
+      "caption": "Dining and self kitchen"
+    },
+    {
+      "image": "/images/g6/laundry.jpg",
+      "caption": "Laundry"
+    }
+  ]
+}

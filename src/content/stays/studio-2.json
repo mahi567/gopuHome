@@ -1,0 +1,27 @@
+{
+  "name": "Gopu Studio Room 2",
+  "code": "",
+  "type": "studios",
+  "label": "",
+  "order": 110,
+  "location": "Bengaluru — exact location shared on enquiry",
+  "mapUrl": "",
+  "mapQuery": "Gopu Homestay Bengaluru",
+  "price": "",
+  "rooms": "Studio",
+  "capacity": "Up to 2 guests",
+  "description": "A bright, private studio that works for both short and monthly stays.",
+  "amenities": [
+    "AC",
+    "Kitchenette",
+    "Wi-Fi",
+    "Geyser",
+    "TV"
+  ],
+  "photos": [
+    {
+      "image": "/images/studio-2.jpg",
+      "caption": ""
+    }
+  ]
+}

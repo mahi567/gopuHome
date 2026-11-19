@@ -1,0 +1,27 @@
+{
+  "name": "Gopu Studio Room 1",
+  "code": "",
+  "type": "studios",
+  "label": "",
+  "order": 100,
+  "location": "Bengaluru — exact location shared on enquiry",
+  "mapUrl": "",
+  "mapQuery": "Gopu Homestay Bengaluru",
+  "price": "",
+  "rooms": "Studio",
+  "capacity": "Up to 2 guests",
+  "description": "A modern studio with attached bathroom, kitchenette and work desk.",
+  "amenities": [
+    "AC",
+    "Kitchenette",
+    "Wi-Fi",
+    "Work desk",
+    "TV"
+  ],
+  "photos": [
+    {
+      "image": "/images/studio-1.jpg",
+      "caption": ""
+    }
+  ]
+}

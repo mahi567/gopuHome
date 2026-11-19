@@ -1,0 +1,174 @@
+---
+import Base from "../../layouts/Base.astro";
+import Icon from "../../components/Icon.astro";
+import StayCard from "../../components/StayCard.astro";
+import site from "../../data/site.json";
+import { getStays, typeOf, mapLink, coverOf, badgeOf, ratingOf } from "../../lib/stays.js";
+
+// One static page is generated per property file in src/content/stays/.
+export async function getStaticPaths() {
+  const stays = await getStays();
+  return stays.map((stay) => ({
+    params: { id: stay.id },
+    props: { stay, others: stays.filter((s) => s.id !== stay.id && s.type === stay.type).slice(0, 3) },
+  }));
+}
+
+const { stay, others } = Astro.props;
+const type = typeOf(stay.type);
+const cover = coverOf(stay);
+const { rating, count } = ratingOf(stay);
+const area = stay.location.split(",").slice(-2).join(",").trim();
+const whatsappText = encodeURIComponent(`Hi, I'm interested in ${stay.name} (${stay.location}). Please share the details.`);
+
+// Photos: the big one slides through all of them; up to four more sit beside it.
+const photos = stay.photos.filter((p) => p.image);
+const rest = photos.length - 1;
+const tileCount = rest >= 4 ? 4 : rest >= 2 ? 2 : rest;
+const tiles = photos.slice(1, 1 + tileCount);
+const hidden = photos.length - 1 - tileCount;
+
+// A small icon for each facility, picked from its wording.
+const facilityIcon = (text) => {
+  const t = text.toLowerCase();
+  if (/wi-?fi|internet/.test(t)) return "wifi";
+  if (/meal|food|dining|kitchen|breakfast/.test(t)) return "utensils";
+  if (/wash|laundry|water|geyser/.test(t)) return "droplet";
+  if (/parking|car|bike/.test(t)) return "car";
+  if (/cctv|camera/.test(t)) return "video";
+  if (/security|safe|guard/.test(t)) return "shield";
+  if (/clean|housekeeping/.test(t)) return "sparkles";
+  if (/lift|floor/.test(t)) return "building";
+  if (/tv|sofa|lounge|furnish/.test(t)) return "sofa";
+  if (/bed|room|ac\b/.test(t)) return "bed";
+  if (/game|tennis|foosball|gym|common/.test(t)) return "users";
+  return "check";
+};
+
+// Embedded map: only when we know where the property is.
+const fromUrl = stay.mapUrl?.match(/[?&]query=([^&]+)/)?.[1];
+const mapQ = fromUrl ? decodeURIComponent(fromUrl) : stay.mapQuery || (/enquiry/i.test(stay.location) ? "" : stay.location);
+const mapEmbed = mapQ ? `https://www.google.com/maps?q=${encodeURIComponent(mapQ)}&z=16&output=embed` : "";
+---
+<Base
+  page="stays"
+  title={`${stay.name} — ${badgeOf(stay)} in ${area} | gopuhomestays`}
+  description={stay.description || `${stay.name}, ${stay.location}.`}
+  image={cover || undefined}
+>
+  <section class="pd-head">
+    <div class="container">
+      <p class="crumbs"><a href="/">Home</a><span>/</span><a href="/stays/">All stays</a><span>/</span><a href={`/stays/?type=${type.id}`}>{type.name}</a></p>
+      <div class="pd-title">
+        <div>
+          <div class="pd-tags">
+            <span class="pd-tag">{badgeOf(stay)}</span>
+            {count && (
+              <a class="g-rating g-rating-link" href={mapLink(stay)} target="_blank" rel="noopener"><b>{rating.toFixed(1)}</b><span class="stars" style={`--pct:${(rating / 5) * 100}%`} aria-hidden="true">★★★★★</span><span>{count} Google review{count === 1 ? "" : "s"}</span></a>
+            )}
+          </div>
+          <h1>{stay.name}</h1>
+          <p class="loc"><Icon name="pin" /><span>{stay.location}</span></p>
+        </div>
+        <div class="actions">
+          <a class="btn btn-primary" href={`tel:${site.phoneDial}`}><Icon name="phone" /><span>Call now</span></a>
+          <a class="btn btn-outline" href={`https://wa.me/${site.whatsapp}?text=${whatsappText}`} target="_blank" rel="noopener"><Icon name="whatsapp" /><span>WhatsApp</span></a>
+        </div>
+      </div>
+
+      <div class:list={["pd-gallery", `tiles-${tiles.length}`]} data-title={stay.name} data-photos={JSON.stringify(photos)}>
+        <div class={`pd-slider media-${stay.type}`}>
+          {photos.length === 0 && <span class="media-icon"><Icon name={type.icon} /></span>}
+          <div class="pd-track">
+            {photos.map((p, i) => (
+              <div class="pd-slide" style={`--bg-img:url('${p.image}')`}><img src={p.image} alt={`${stay.name} — ${p.caption || "photo " + (i + 1)}`} /></div>
+            ))}
+          </div>
+          {photos.length > 0 && (
+            <button class="pd-zoom" type="button" aria-label="View photo full screen"><Icon name="search" /><span>View photos</span></button>
+          )}
+          {photos.length > 1 && (
+            <button class="pd-nav pd-prev" type="button" aria-label="Previous photo">‹</button>
+            <button class="pd-nav pd-next" type="button" aria-label="Next photo">›</button>
+            <div class="pd-bar">
+              <b class="pd-caption">{photos[0].caption}</b>
+              <span class="pd-dots">{photos.map((_, i) => <i class:list={{ on: i === 0 }}></i>)}</span>
+              <span class="pd-count">1 / {photos.length}</span>
+            </div>
+          )}
+        </div>
+        {tiles.map((p, i) => (
+          <button class="pd-tile" type="button" data-open={i + 1} aria-label={`View photo: ${p.caption || i + 2}`}>
+            <img src={p.image} alt="" loading="lazy" />
+            {i === tiles.length - 1 && hidden > 0
+              ? <span class="pd-more">+{hidden} more photo{hidden > 1 ? "s" : ""}</span>
+              : p.caption && <span class="pd-tile-cap">{p.caption}</span>}
+          </button>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section pd-section">
+    <div class="container pd-body">
+      <div class="pd-main">
+        <dl class="pd-facts">
+          {stay.rooms && <div><span class="pd-ico"><Icon name="bed" /></span><dt>Type</dt><dd>{stay.rooms}</dd></div>}
+          {stay.capacity && <div><span class="pd-ico"><Icon name="users" /></span><dt>Capacity</dt><dd>{stay.capacity}</dd></div>}
+          <div><span class="pd-ico"><Icon name="key" /></span><dt>Rates</dt><dd>{stay.price || "Contact for rates"}</dd></div>
+          {stay.code && <div><span class="pd-ico"><Icon name="badge" /></span><dt>Property code</dt><dd>{stay.code}</dd></div>}
+        </dl>
+
+        {stay.description && (
+          <div class="pd-block">
+            <h2>About this property</h2>
+            <p>{stay.description}</p>
+          </div>
+        )}
+
+        {stay.amenities.length > 0 && (
+          <div class="pd-block">
+            <h2>Facilities</h2>
+            <ul class="pd-amen">
+              {stay.amenities.map((a) => <li><span class="pd-ico"><Icon name={facilityIcon(a)} /></span>{a}</li>)}
+            </ul>
+          </div>
+        )}
+
+        <div class="pd-block">
+          <h2>Location</h2>
+          <p class="loc"><Icon name="pin" /><span>{stay.location}</span></p>
+          {mapEmbed && (
+            <div class="pd-map"><iframe src={mapEmbed} title={`Map showing ${stay.name}`} loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+          )}
+          <a class="btn btn-outline" href={mapLink(stay)} target="_blank" rel="noopener"><Icon name="pin" /><span>Open in Google Maps</span></a>
+        </div>
+      </div>
+
+      <aside class="pd-side card">
+        <h2>Interested in this stay?</h2>
+        <p class="pd-rate"><small>Rates</small><b>{stay.price || "Contact for rates"}</b></p>
+        <div class="pd-cta">
+          <a class="btn btn-primary" href={`tel:${site.phoneDial}`}><Icon name="phone" /><span>Call {site.phoneDisplay}</span></a>
+          <a class="btn btn-outline" href={`https://wa.me/${site.whatsapp}?text=${whatsappText}`} target="_blank" rel="noopener"><Icon name="whatsapp" /><span>WhatsApp us</span></a>
+        </div>
+        <ul class="pd-notes">
+          <li><Icon name="clock" /><span>{site.hours}</span></li>
+          <li><Icon name="shield" /><span>Visit the property before you book</span></li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  {others.length > 0 && (
+    <section class="section section-alt">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">More {type.name}</span>
+          <h2>You may also like</h2>
+        </div>
+        <div class="grid grid-even">{others.map((s) => <StayCard stay={s} />)}</div>
+      </div>
+    </section>
+  )}
+</Base>

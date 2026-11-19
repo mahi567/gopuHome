@@ -1,0 +1,27 @@
+{
+  "name": "Gopu Flat 1",
+  "code": "",
+  "type": "flats",
+  "label": "",
+  "order": 10,
+  "location": "Bengaluru — exact location shared on enquiry",
+  "mapUrl": "",
+  "mapQuery": "Gopu Homestay Bengaluru",
+  "price": "",
+  "rooms": "2 BHK",
+  "capacity": "Up to 6 guests",
+  "description": "A spacious, fully furnished flat suited to families and longer stays.",
+  "amenities": [
+    "Furnished",
+    "Kitchen",
+    "Wi-Fi",
+    "Parking",
+    "Power backup"
+  ],
+  "photos": [
+    {
+      "image": "/images/flat-1.jpg",
+      "caption": ""
+    }
+  ]
+}

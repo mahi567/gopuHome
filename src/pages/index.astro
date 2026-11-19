@@ -1,0 +1,123 @@
+---
+import Base from "../layouts/Base.astro";
+import Icon from "../components/Icon.astro";
+import StayCard from "../components/StayCard.astro";
+import Cta from "../components/Cta.astro";
+import Marquee from "../components/Marquee.astro";
+import GoogleReviews from "../components/GoogleReviews.astro";
+import Stickers from "../components/Stickers.astro";
+import site from "../data/site.json";
+import { TYPES, getStays, staysOfType, coverOf } from "../lib/stays.js";
+
+const stays = await getStays();
+const groups = TYPES.map((t) => ({ type: t, list: staysOfType(stays, t.id) })).filter((g) => g.list.length);
+const featured = groups.map((g) => g.list[0]);
+---
+<Base
+  page="home"
+  title="gopuhomestays — PG, Co-living, Flats, Studio Rooms & Lodges in Bengaluru"
+  description="Gopu Homestays: co-living PGs, ladies PG, flats, studio rooms and lodges. A trusted co-living brand with 1,000+ beds across Bengaluru and Hyderabad."
+>
+  <section class="hero">
+    <div class="container">
+      <div>
+        <span class="eyebrow">Welcome to gopuhomestays</span>
+        <h1>A comfortable stay for <em>every need</em></h1>
+        <p class="lead">Co-living PGs, a ladies PG, flats, studio rooms and lodges from a trusted co-living brand with over 1,000 beds across Bengaluru and Hyderabad.</p>
+        <div class="hero-actions">
+          <a class="btn btn-accent" href="#stay-types">Explore our stays</a>
+          <a class="btn btn-light" href={`https://wa.me/${site.whatsapp}?text=${encodeURIComponent("Hi, I have an enquiry about Gopu Home Stay.")}`} target="_blank" rel="noopener"><Icon name="whatsapp" /><span>Enquire on WhatsApp</span></a>
+        </div>
+        <ul class="hero-points">
+          <li><Icon name="check" />One contact number</li>
+          <li><Icon name="check" />24/7 security</li>
+          <li><Icon name="check" />Home-style meals</li>
+        </ul>
+      </div>
+      <aside class="glass">
+        <h3>Gopu Home Stay at a glance</h3>
+        <p>Trusted by working professionals and students.</p>
+        <div class="glass-stats">
+          <div><b>2018</b><small>Started with 72 beds</small></div>
+          <div><b data-count="1000" data-suffix="+">1,000+</b><small>Beds today</small></div>
+          <div><b>2</b><small>Cities: Bengaluru &amp; Hyderabad</small></div>
+          <div><b>24/7</b><small>Security &amp; CCTV</small></div>
+        </div>
+        <a class="btn btn-accent btn-block" href="/stays/">View all stays</a>
+        <div class="glass-contact">
+          <a href={`tel:${site.phoneDial}`}><Icon name="phone" /><span>{site.phoneDisplay}</span></a>
+          <a href={`https://wa.me/${site.whatsapp}?text=${encodeURIComponent("Hi, I have an enquiry about Gopu Home Stay.")}`} target="_blank" rel="noopener"><Icon name="whatsapp" /><span>Enquire on WhatsApp</span></a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <Marquee />
+
+  <section class="section" id="stay-types">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Types of stays</span>
+        <h2>Choose the stay that suits you</h2>
+        <p>Tap a category to see photos, locations and details of every property.</p>
+      </div>
+      <div class="grid grid-4">
+        {groups.map(({ type, list }, i) => (
+          <a class="type-tile" href={`/stays/?type=${type.id}`}>
+            {coverOf(list[0]) && <img src={coverOf(list[0])} alt="" loading="lazy" onerror="this.remove()" />}
+            <div class="tile-body">
+              <span class:list={["gloss-ico", { amber: i % 2 }]}><Icon name={type.icon} /></span>
+              <h3>{type.name}</h3>
+              <p>{type.blurb}</p>
+              <div class="tile-foot">
+                <span class="tile-count">{list.length} {list.length === 1 ? "property" : "properties"}</span>
+                <span class="tile-go"><Icon name="arrow" /></span>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Featured</span>
+        <h2>Popular places to stay</h2>
+        <p>One from each category. Tap a card for photos, map and booking.</p>
+      </div>
+      <div class="grid grid-4">
+        {featured.map((stay) => <StayCard stay={stay} />)}
+      </div>
+      <p class="center-action"><a class="btn btn-outline" href="/stays/">View all stays</a></p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container teaser">
+      <div class="teaser-photos">
+        <img src="/images/g3/double-room.jpg" alt="A double room at Gopu Home Stay" loading="lazy" />
+        <img src="/images/g3/dining.jpg" alt="Dining hall at Gopu Home Stay" loading="lazy" />
+      </div>
+      <div class="prose">
+        <span class="eyebrow">About us</span>
+        <h2>From 72 beds to over 1,000</h2>
+        <p>What began as a humble initiative with 72 beds in 2018 has grown into a trusted co-living brand across Bengaluru and Hyderabad. We offer a safe, comfortable and modern living experience for working professionals and students.</p>
+        <ul class="ticks">
+          <li><Icon name="check" />Premium buildings &amp; spacious rooms</li>
+          <li><Icon name="check" />Zero-compromise hygiene</li>
+          <li><Icon name="check" />24/7 high security</li>
+          <li><Icon name="check" />Hygienic &amp; nutritious food</li>
+        </ul>
+        <p><a class="btn btn-primary" href="/about/">More about us</a></p>
+      </div>
+    </div>
+  </section>
+
+  <GoogleReviews />
+
+  <Stickers show={["bed", "tv", "gym", "games", "shield", "clean"]} />
+
+  <Cta title="Ready to book or have a question?" text="Call us, or message us on WhatsApp." />
+</Base>

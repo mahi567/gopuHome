@@ -1,0 +1,121 @@
+# Decap CMS settings for gopuhomestays.
+#
+# The editor runs on your own computer: "Edit site" starts a small local helper
+# (decap-server) that saves changes straight into this project's files.
+# There is no login and nothing is sent to any outside service.
+backend:
+  name: proxy
+  proxy_url: http://localhost:8081/api/v1
+  branch: main
+local_backend: true
+
+site_url: http://localhost:4321
+logo_url: /images/logo.svg
+
+# Photos uploaded in the editor are saved here and published at /images/uploads/...
+media_folder: public/images/uploads
+public_folder: /images/uploads
+
+collections:
+  - name: stays
+    label: Properties
+    label_singular: Property
+    description: >
+      Every PG, flat, studio room and lodge. Each one gets its own page on the site.
+    folder: src/content/stays
+    format: json
+    extension: json
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    identifier_field: name
+    summary: "{{name}} — {{location}}"
+    sortable_fields: [order, name, type]
+    fields:
+      - { name: name, label: Name, widget: string, hint: "As shown on the site, for example: Gopu Homestay PG (G8)" }
+      - { name: code, label: Code, widget: string, required: false, hint: "Building code such as G8. Leave empty if none." }
+      - name: type
+        label: Category
+        widget: select
+        options:
+          - { label: "PG & Co-living", value: hostels }
+          - { label: Flats, value: flats }
+          - { label: Studio Rooms, value: studios }
+          - { label: Lodges, value: lodges }
+      - { name: label, label: Photo badge, widget: string, required: false, hint: "Small tag on the photo, for example: Co-living PG or Ladies PG. Leave empty to use the category." }
+      - { name: order, label: Position in lists, widget: number, value_type: int, default: 200, hint: "Lower numbers appear first." }
+      - { name: location, label: Address, widget: string }
+      - { name: mapUrl, label: Google Maps link, widget: string, required: false, hint: "Paste the link from Google Maps > Share. If empty, the site searches Maps for the text below." }
+      - { name: mapQuery, label: Maps search text, widget: string, required: false, hint: "Used only when the link above is empty, for example a plus code: 2JP8+R8 Bengaluru" }
+      - { name: price, label: Rates, widget: string, required: false, hint: "For example: From Rs 8,000 / month. Leave empty to show 'Contact for rates'." }
+      - { name: googleRating, label: Google rating, widget: number, value_type: float, min: 0, max: 5, step: 0.1, required: false, hint: "The star rating shown on this property's Google Maps listing, for example 4.5. Leave empty to hide it." }
+      - { name: googleReviews, label: Number of Google reviews, widget: number, value_type: int, min: 0, required: false, hint: "The number in brackets next to the rating on Google Maps." }
+      - { name: rooms, label: Room type, widget: string, required: false, hint: "For example: Co-living PG, Ladies only, 2 BHK" }
+      - { name: capacity, label: Capacity, widget: string, required: false, hint: "For example: Sharing & single rooms" }
+      - { name: description, label: Description, widget: text, required: false }
+      - name: amenities
+        label: Facilities
+        widget: list
+        required: false
+        hint: "Separate with commas: Gym, Wi-Fi, Meals"
+      - name: photos
+        label: Photos
+        label_singular: Photo
+        widget: list
+        required: false
+        summary: "{{fields.caption}}"
+        hint: "The first photo is the card photo. Resize large photos to about 1200 px wide before uploading."
+        fields:
+          - { name: image, label: Photo, widget: image }
+          - { name: caption, label: Caption, widget: string, required: false }
+
+  - name: settings
+    label: Site settings
+    editor: { preview: false }
+    files:
+      - name: site
+        label: Contact details and links
+        file: src/data/site.json
+        fields:
+          - { name: name, label: Site name, widget: string }
+          - { name: tagline, label: Tagline, widget: string }
+          - { name: phoneDisplay, label: Phone (as shown), widget: string, hint: "+91 99862 22276" }
+          - { name: phoneDial, label: Phone (for calling), widget: string, hint: "Digits only with country code: +919986222276" }
+          - { name: whatsapp, label: WhatsApp number, widget: string, hint: "Country code and number, no plus sign: 919986222276" }
+          - { name: address, label: Office address, widget: string }
+          - { name: hours, label: Hours, widget: string }
+          - name: social
+            label: Social media links
+            widget: object
+            fields:
+              - { name: instagram, label: Instagram, widget: string, required: false }
+      - name: about
+        label: About Us photos
+        file: src/data/about.json
+        fields:
+          - name: gallery
+            label: Photos on the About Us page
+            label_singular: Photo
+            widget: list
+            required: false
+            summary: "{{fields.caption}}"
+            hint: "Five photos look best. The first one is shown largest."
+            fields:
+              - { name: image, label: Photo, widget: image }
+              - { name: caption, label: Caption, widget: string, required: false }
+      - name: types
+        label: Category names and descriptions
+        file: src/data/types.json
+        fields:
+          - name: types
+            label: Categories
+            widget: list
+            allow_add: false
+            summary: "{{fields.name}}"
+            fields:
+              - { name: id, label: "ID (do not change)", widget: string }
+              - { name: name, label: Name, widget: string }
+              - { name: single, label: Name for one, widget: string }
+              - { name: icon, label: Icon, widget: select, options: [building, bed, sofa, hotel] }
+              - { name: blurb, label: Short description, widget: text }
+              - { name: bestFor, label: Best for, widget: string }

@@ -1,0 +1,36 @@
+{
+  "types": [
+    {
+      "id": "flats",
+      "name": "Flats",
+      "single": "Flat",
+      "icon": "building",
+      "blurb": "Fully furnished family flats with kitchen, living room and private parking.",
+      "bestFor": "Families & long stays"
+    },
+    {
+      "id": "hostels",
+      "name": "PG & Co-living",
+      "single": "PG",
+      "icon": "bed",
+      "blurb": "Co-living PGs and a ladies-only PG across Nagavara, Thanisandra, HBR Layout and Kasturi Nagar.",
+      "bestFor": "Students & working professionals"
+    },
+    {
+      "id": "studios",
+      "name": "Studio Rooms",
+      "single": "Studio Room",
+      "icon": "sofa",
+      "blurb": "Compact, modern studio rooms with attached bath and kitchenette.",
+      "bestFor": "Couples & solo travellers"
+    },
+    {
+      "id": "lodges",
+      "name": "Lodges",
+      "single": "Lodge",
+      "icon": "hotel",
+      "blurb": "Clean, comfortable lodge rooms for short stays, with 24-hour check-in.",
+      "bestFor": "Travellers & pilgrims"
+    }
+  ]
+}

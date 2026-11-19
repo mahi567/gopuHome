@@ -1,0 +1,47 @@
+{
+  "name": "Gopu Homestay (G5)",
+  "code": "G5",
+  "type": "hostels",
+  "label": "Co-living PG",
+  "order": 70,
+  "location": "91/398, 3rd Cross Rd, 3rd Block, HBR Layout, Bengaluru 560043",
+  "mapUrl": "https://www.google.com/maps/search/?api=1&query=13.027639,77.631194",
+  "mapQuery": "",
+  "price": "",
+  "googleRating": 3.8,
+  "googleReviews": 4,
+  "rooms": "Co-living PG",
+  "capacity": "Sharing & single rooms",
+  "description": "Co-living stay in a quiet residential lane of HBR Layout, 3rd Block, with double and twin rooms, full-wall wardrobes and attached bathrooms.",
+  "amenities": [
+    "Attached bathroom",
+    "Geyser",
+    "Full-wall wardrobes",
+    "Reception desk",
+    "Dining hall",
+    "Meals",
+    "Wi-Fi"
+  ],
+  "photos": [
+    {
+      "image": "/images/g5/double-room.jpg",
+      "caption": "Double bed room"
+    },
+    {
+      "image": "/images/g5/twin-room.jpg",
+      "caption": "Twin sharing room"
+    },
+    {
+      "image": "/images/g5/reception.jpg",
+      "caption": "Reception"
+    },
+    {
+      "image": "/images/g5/bathroom.jpg",
+      "caption": "Attached bathroom"
+    },
+    {
+      "image": "/images/g3/dining.jpg",
+      "caption": "Dining hall"
+    }
+  ]
+}

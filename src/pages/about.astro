@@ -1,0 +1,96 @@
+---
+import Base from "../layouts/Base.astro";
+import Icon from "../components/Icon.astro";
+import Cta from "../components/Cta.astro";
+import GoogleReviews from "../components/GoogleReviews.astro";
+import Stickers from "../components/Stickers.astro";
+import about from "../data/about.json";
+
+// The photo and name are filled in from the editor:
+// Site settings > About Us photo and name.
+const why = [
+  ["building", "Premium Buildings & Spacious Rooms", "Well-ventilated, spacious rooms paired with modern infrastructure and amenities.", "/images/g1/building.jpg"],
+  ["sparkles", "Zero-Compromise Hygiene", "Daily room cleaning and a dedicated housekeeping system to keep the entire property spotless at all times.", "/images/g4/laundry.jpg"],
+  ["video", "24/7 High Security", "Continuous CCTV surveillance and strict security protocols to ensure complete peace of mind for our residents.", "/images/g6/entrance.jpg"],
+  ["utensils", "Hygienic & Nutritious Food", "Wholesome, home-style meals prepared in hygienic kitchens using top-quality ingredients.", "/images/g4/dining.jpg"],
+];
+const gallery = (about.gallery || []).filter((p) => p.image);
+---
+<Base page="about" title="About Us — gopuhomestays" description="From 72 beds in 2018 to over 1,000 beds across Bengaluru and Hyderabad: the story of Gopu Home Stay.">
+  <section class="page-hero" style="--hero-img:url('/images/g3/dining.jpg')">
+    <div class="container">
+      <h1>About Us</h1>
+      <p>A trusted co-living brand for working professionals and students.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container about-solo">
+
+      <div class="prose">
+        <span class="eyebrow">Our story</span>
+        <h2>About Gopu Home Stay</h2>
+        <p>What began as a humble initiative with 72 beds in 2018 has grown into a trusted co-living brand with over 1,000 beds across Bengaluru and Hyderabad.</p>
+        <p>At Gopu Home Stay, we provide more than just accommodation—we offer a safe, comfortable, and modern living experience tailored for working professionals and students.</p>
+        <p>Our journey has expanded across all major IT corridors in Bengaluru, and with overwhelming customer trust, we have recently launched our operations in Hyderabad.</p>
+        <div class="about-stats">
+          <div><b>2018</b><span>Started with 72 beds</span></div>
+          <div><b data-count="1000" data-suffix="+">1,000+</b><span>Beds today</span></div>
+          <div><b data-count="2">2</b><span>Cities: Bengaluru &amp; Hyderabad</span></div>
+        </div>
+        <p><a class="btn btn-primary" href="/stays/">See all our stays</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Our quality standards</span>
+        <h2>Why Choose Us?</h2>
+        <p>Our rapid growth and the trust of thousands of residents stem from our strict adherence to core quality standards:</p>
+      </div>
+      <div class="grid grid-4">
+        {why.map(([icon, title, text, image]) => (
+          <div class="card why-card">
+            <div class="why-photo"><img src={image} alt={title} loading="lazy" /><div class="f-icon"><Icon name={icon} /></div></div>
+            <div class="why-text"><h3>{title}</h3><p>{text}</p></div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <GoogleReviews />
+
+  {gallery.length > 0 && (
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Life at Gopu Home Stay</span>
+          <h2>A look inside</h2>
+        </div>
+        <div class="about-gallery">
+          {gallery.map((p) => (
+            <figure><img src={p.image} alt={p.caption || "Gopu Home Stay"} loading="lazy" />{p.caption && <figcaption>{p.caption}</figcaption>}</figure>
+          ))}
+        </div>
+        <p class="about-gallery-more"><a class="btn btn-outline" href="/gallery/">See all photos</a></p>
+      </div>
+    </section>
+  )}
+
+  <Stickers show={["home", "bed", "food", "key", "tv", "desk"]} />
+
+  <section class="section mission-section">
+    <span class="orb orb-1"></span><span class="orb orb-2"></span><span class="orb orb-3"></span>
+    <div class="container">
+      <div class="mission">
+        <span class="eyebrow">Our mission</span>
+        <p>Our primary goal at Gopu Home Stay is to ensure that anyone moving to a new city for work or education never feels away from home, by delivering unmatched hospitality, safety, and comfort.</p>
+      </div>
+    </div>
+  </section>
+
+  <Cta title="Talk to us" text="We're happy to help you pick the right stay." />
+</Base>

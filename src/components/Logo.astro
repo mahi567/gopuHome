@@ -1,0 +1,11 @@
+---
+import { LOGO_SHAPES } from "../lib/icons.js";
+import site from "../data/site.json";
+const { light = false } = Astro.props;
+---
+<a class:list={["brand", { "brand-light": light }]} href="/" aria-label={`${site.name} home`}>
+  <span class="brand-mark">
+    <svg viewBox="0 0 64 64" role="img" aria-label={`${site.name} logo`} set:html={LOGO_SHAPES} />
+  </span>
+  <span>gopu<b>homestays</b></span>
+</a>

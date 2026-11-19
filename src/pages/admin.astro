@@ -1,0 +1,17 @@
+---
+// The content editor (Decap CMS). It reads public/admin/config.yml.
+// It only works on the editing computer while "Edit site" is running,
+// and it is removed from the built site (see scripts/strip-admin.mjs).
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>gopuhomestays — content editor</title>
+  </head>
+  <body>
+    <script is:inline src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  </body>
+</html>

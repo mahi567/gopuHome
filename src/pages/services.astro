@@ -1,0 +1,90 @@
+---
+import Base from "../layouts/Base.astro";
+import Icon from "../components/Icon.astro";
+import Cta from "../components/Cta.astro";
+import Stickers from "../components/Stickers.astro";
+import { TYPES, getStays, staysOfType, coverOf } from "../lib/stays.js";
+const stays = await getStays();
+const offers = TYPES.map((t) => ({ t, list: staysOfType(stays, t.id) })).filter((o) => o.list.length);
+
+const facilities = [
+  ["wifi", "Wi-Fi", "Internet access for work, study and streaming."],
+  ["utensils", "Home-style food", "Daily meals at our PGs."],
+  ["sparkles", "Housekeeping", "Regular cleaning of rooms and common areas."],
+  ["droplet", "Hot water", "Geysers or hot water supply at every property."],
+  ["car", "Parking", "Two-wheeler and car parking at selected stays."],
+  ["video", "Security", "CCTV and on-site staff for your peace of mind."],
+];
+const steps = [
+  ["search", "Pick a stay", "Browse by type and check photos and location."],
+  ["phone", "Call or email us", "Tell us your dates and number of guests."],
+  ["key", "Confirm & check in", "We confirm the room and rates, and you move in."],
+];
+---
+<Base page="services" title="Services — gopuhomestays" description="Co-living PGs, flats, studio rooms and lodges, and the facilities that come with them.">
+  <section class="page-hero" style="--hero-img:url('/images/g3/double-room.jpg')">
+    <div class="container">
+      <h1>Services</h1>
+      <p>Four kinds of stay, and the facilities that come with them.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Accommodation</span>
+        <h2>What we offer</h2>
+        <p>Tap any service to see the properties in that category.</p>
+      </div>
+      <div class="grid grid-4">
+        {offers.map(({ t, list }) => (
+          <a class="card why-card" href={`/stays/?type=${t.id}`}>
+            <div class="why-photo">
+              {coverOf(list[0]) && <img src={coverOf(list[0])} alt={t.name} loading="lazy" />}
+              <div class="f-icon"><Icon name={t.icon} /></div>
+            </div>
+            <div class="why-text">
+              <h3>{t.name}</h3>
+              <p>{t.blurb}</p>
+              <p class="offer-for">Best for: {t.bestFor.toLowerCase()}</p>
+              <span class="link">See {list.length} {list.length === 1 ? "property" : "properties"} <Icon name="arrow" /></span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Facilities</span>
+        <h2>Included with your stay</h2>
+        <p>Facilities vary by property — open a stay to see its exact list.</p>
+      </div>
+      <div class="grid grid-even">
+        {facilities.map(([icon, title, text]) => (
+          <div class="card feature feature-row"><div class="f-icon"><Icon name={icon} /></div><div><h3>{title}</h3><p>{text}</p></div></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">How it works</span>
+        <h2>Booking in three steps</h2>
+      </div>
+      <div class="grid grid-even">
+        {steps.map(([icon, title, text], i) => (
+          <div class="card feature step"><span class="step-no">{i + 1}</span><div class="f-icon"><Icon name={icon} /></div><h3>{title}</h3><p>{text}</p></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Stickers show={["key", "desk", "food", "gym", "shield", "clean"]} />
+
+  <Cta title="Need help choosing?" text="Tell us what you need and we'll suggest the right place." />
+</Base>

@@ -1,0 +1,14 @@
+---
+// A moving band of short phrases, used to fill the space between sections.
+// The list is repeated so the loop has no visible seam.
+import Icon from "./Icon.astro";
+const {
+  items = ["Safe & secure", "Spacious rooms", "Daily housekeeping", "Home-style meals", "24/7 CCTV", "Wi-Fi", "Working professionals", "Students", "Bengaluru", "Hyderabad"],
+  reverse = false,
+} = Astro.props;
+---
+<div class:list={["marquee", { reverse }]} aria-hidden="true">
+  <div class="marquee-track">
+    {[0, 1].map(() => items.map((text) => <span><Icon name="sparkles" />{text}</span>))}
+  </div>
+</div>

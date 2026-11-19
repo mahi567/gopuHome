@@ -1,0 +1,51 @@
+{
+  "name": "Gopu Homestay Colive PG (G4)",
+  "code": "G4",
+  "type": "hostels",
+  "label": "Co-living PG",
+  "order": 60,
+  "location": "1st Main Rd, P&T Layout, Rachenahalli, Thanisandra, Bengaluru 560077",
+  "mapUrl": "https://www.google.com/maps/search/?api=1&query=13.061333,77.629167",
+  "mapQuery": "",
+  "price": "",
+  "googleRating": 3.5,
+  "googleReviews": 2,
+  "rooms": "Co-living PG",
+  "capacity": "Sharing & single rooms",
+  "description": "Co-living PG on 1st Main Road, P&T Layout, in the Rachenahalli and Thanisandra area, with spacious twin rooms, a rooftop dining area and laundry.",
+  "amenities": [
+    "Rooftop dining",
+    "Washing machine",
+    "Spacious rooms",
+    "Wardrobe",
+    "Study desk",
+    "Meals",
+    "Wi-Fi"
+  ],
+  "photos": [
+    {
+      "image": "/images/g4/building.jpg",
+      "caption": "Building"
+    },
+    {
+      "image": "/images/g4/twin-room-large.jpg",
+      "caption": "Spacious twin room"
+    },
+    {
+      "image": "/images/g4/twin-room.jpg",
+      "caption": "Twin sharing room"
+    },
+    {
+      "image": "/images/g4/wardrobe-desk.jpg",
+      "caption": "Wardrobe and study desk"
+    },
+    {
+      "image": "/images/g4/dining.jpg",
+      "caption": "Rooftop dining"
+    },
+    {
+      "image": "/images/g4/laundry.jpg",
+      "caption": "Laundry"
+    }
+  ]
+}

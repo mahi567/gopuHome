@@ -1,0 +1,68 @@
+{
+  "name": "Gopu Home Stay Co-living (G2)",
+  "code": "G2",
+  "type": "hostels",
+  "label": "Co-living PG",
+  "order": 40,
+  "location": "Kanaka Nagar, Veerannapalya, Nagavara, Bengaluru 560045",
+  "mapUrl": "https://www.google.com/maps/search/?api=1&query=13.041694,77.612472",
+  "mapQuery": "",
+  "price": "",
+  "googleRating": 4.2,
+  "googleReviews": 159,
+  "rooms": "Co-living PG",
+  "capacity": "Sharing & single rooms",
+  "description": "Our Kanaka Nagar co-living property in Nagavara, close to shops and transport, with bright furnished twin rooms, a dining hall and a gym.",
+  "amenities": [
+    "Gym",
+    "Dining hall",
+    "Reception desk",
+    "Furnished rooms",
+    "Wardrobe",
+    "Study table",
+    "Meals",
+    "Wi-Fi"
+  ],
+  "photos": [
+    {
+      "image": "/images/g7/building.jpg",
+      "caption": "Building"
+    },
+    {
+      "image": "/images/g7/entrance.jpg",
+      "caption": "Entrance"
+    },
+    {
+      "image": "/images/g2/twin-room-1.jpg",
+      "caption": "Twin sharing room"
+    },
+    {
+      "image": "/images/g2/twin-room-2.jpg",
+      "caption": "Twin room with wardrobe"
+    },
+    {
+      "image": "/images/g2/twin-room-3.jpg",
+      "caption": "Twin room with smart lock"
+    },
+    {
+      "image": "/images/g7/twin-room-tv.jpg",
+      "caption": "Twin room with TV"
+    },
+    {
+      "image": "/images/g7/double-room.jpg",
+      "caption": "Double bed room"
+    },
+    {
+      "image": "/images/g5/reception.jpg",
+      "caption": "Reception"
+    },
+    {
+      "image": "/images/g3/dining.jpg",
+      "caption": "Dining hall"
+    },
+    {
+      "image": "/images/g1/gym.jpg",
+      "caption": "Gym"
+    }
+  ]
+}

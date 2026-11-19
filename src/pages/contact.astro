@@ -1,0 +1,63 @@
+---
+import Base from "../layouts/Base.astro";
+import Icon from "../components/Icon.astro";
+import site from "../data/site.json";
+import { TYPES, getStays } from "../lib/stays.js";
+const stays = await getStays();
+---
+<Base page="contact" title="Contact — gopuhomestays" description="Call or WhatsApp us about any Gopu Homestays PG, flat, studio room or lodge in Bengaluru.">
+  <section class="page-hero" style="--hero-img:url('/images/g6/dining.jpg')">
+    <div class="container">
+      <h1>Contact us</h1>
+      <p>One number, for calls and WhatsApp, for all our PGs, flats, studio rooms and lodges.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container grid grid-2">
+      <div>
+        <span class="eyebrow">Get in touch</span>
+        <h2>We're here to help</h2>
+        <ul class="contact-list">
+          <li><span class="c-icon"><Icon name="phone" /></span><div><small>Call us</small><a href={`tel:${site.phoneDial}`}>{site.phoneDisplay}</a></div></li>
+          <li><span class="c-icon"><Icon name="message" /></span><div><small>WhatsApp</small><a href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noopener">Chat with us</a></div></li>
+          <li><span class="c-icon"><Icon name="pin" /></span><div><small>Office</small><b>{site.address}</b></div></li>
+          <li><span class="c-icon"><Icon name="clock" /></span><div><small>Hours</small><b>{site.hours}</b></div></li>
+        </ul>
+        <div class="contact-map">
+          <iframe src={`https://www.google.com/maps?q=${encodeURIComponent(site.address)}&z=15&output=embed`} title="Map showing our office" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+      <!-- Sending the form opens WhatsApp with the details filled in as a message to us. -->
+      <form class="card form" id="enquiry-form" name="enquiry">
+        <h3>Enquire on WhatsApp</h3>
+        <div class="form-grid">
+          <div class="field"><label for="f-name">Your name *</label><input id="f-name" name="name" required autocomplete="name" /></div>
+          <div class="field"><label for="f-phone">Phone *</label><input id="f-phone" name="phone" type="tel" required autocomplete="tel" /></div>
+          <div class="field">
+            <label for="f-type">Type of stay</label>
+            <select id="f-type" name="type">
+              <option value="">Any type</option>
+              {TYPES.map((t) => <option value={t.id}>{t.name}</option>)}
+            </select>
+          </div>
+          <div class="field">
+            <label for="f-stay">Property</label>
+            <select id="f-stay" name="stay">
+              <option value="">Any / not sure</option>
+              {stays.map((s) => <option value={s.id} data-type={s.type} data-label={s.name}>{s.name}</option>)}
+            </select>
+          </div>
+          <div class="field"><label for="f-in">Check-in</label><input id="f-in" name="checkin" type="date" /></div>
+          <div class="field"><label for="f-out">Check-out</label><input id="f-out" name="checkout" type="date" /></div>
+          <div class="field full"><label for="f-guests">Guests</label><input id="f-guests" name="guests" type="number" min="1" value="1" /></div>
+          <div class="field full"><label for="f-msg">Message</label><textarea id="f-msg" name="message" rows="4" placeholder="Anything we should know?"></textarea></div>
+        </div>
+        <div class="form-actions">
+          <button class="btn btn-primary" type="submit"><Icon name="whatsapp" /><span>Send on WhatsApp</span></button>
+        </div>
+        <p class="form-note" id="form-status" role="status">This opens WhatsApp with your details filled in. Press send there and we'll reply on WhatsApp.</p>
+      </form>
+    </div>
+  </section>
+</Base>

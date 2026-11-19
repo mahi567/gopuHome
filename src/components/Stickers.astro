@@ -1,0 +1,26 @@
+---
+// A row of round photo stickers that float, used to fill the space between
+// sections. The photos are real ones from the properties; change them here.
+const all = {
+  home: ["Feels like home", "/images/g7/building.jpg"],
+  bed: ["Comfy rooms", "/images/g2/twin-room-1.jpg"],
+  food: ["Home-style meals", "/images/g6/dining.jpg"],
+  key: ["Easy move-in", "/images/g5/reception.jpg"],
+  tv: ["Rooms with TV", "/images/g7/twin-room-tv.jpg"],
+  desk: ["Wardrobe & desk", "/images/g4/wardrobe-desk.jpg"],
+  gym: ["Gym", "/images/g1/gym.jpg"],
+  games: ["Games room", "/images/g1/games.jpg"],
+  shield: ["Safe & secure", "/images/g6/entrance.jpg"],
+  clean: ["Laundry", "/images/g4/laundry.jpg"],
+};
+// Six fit on one row on a laptop screen, so pages ask for six.
+const { show = ["home", "bed", "food", "key", "tv", "desk"] } = Astro.props;
+---
+<div class="stickers" aria-hidden="true">
+  {show.map((id) => (
+    <a class="sticker" href="/gallery/" tabindex="-1">
+      <span class="sticker-photo"><img src={all[id][1]} alt="" loading="lazy" /></span>
+      <span class="sticker-label">{all[id][0]}</span>
+    </a>
+  ))}
+</div>

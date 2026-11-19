@@ -1,0 +1,48 @@
+{
+  "name": "Gopu Homestay PG (G1)",
+  "code": "G1",
+  "type": "hostels",
+  "label": "Co-living PG",
+  "order": 30,
+  "location": "1st Cross Rd, near Kingston High School, Veerannapalya, Bengaluru 560045",
+  "mapUrl": "https://www.google.com/maps/search/?api=1&query=13.040528,77.611778",
+  "mapQuery": "",
+  "price": "",
+  "rooms": "Co-living PG",
+  "capacity": "Sharing & single rooms",
+  "description": "Co-living PG in Veerannapalya, a short walk from Kingston High School, with a gym, games room, laundry and lift. Open 24 hours.",
+  "amenities": [
+    "Gym",
+    "Table tennis & foosball",
+    "Washing machines",
+    "Lift",
+    "Meals",
+    "Wi-Fi"
+  ],
+  "photos": [
+    {
+      "image": "/images/g1/building.jpg",
+      "caption": "Building"
+    },
+    {
+      "image": "/images/g1/corridor.jpg",
+      "caption": "Rooms and lift lobby"
+    },
+    {
+      "image": "/images/g1/gym.jpg",
+      "caption": "Gym"
+    },
+    {
+      "image": "/images/g1/games.jpg",
+      "caption": "Games room"
+    },
+    {
+      "image": "/images/g1/laundry.jpg",
+      "caption": "Laundry"
+    },
+    {
+      "image": "/images/g1/sign.jpg",
+      "caption": "Signboard"
+    }
+  ]
+}

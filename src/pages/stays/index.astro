@@ -1,0 +1,41 @@
+---
+import Base from "../../layouts/Base.astro";
+import StayCard from "../../components/StayCard.astro";
+import Cta from "../../components/Cta.astro";
+import { TYPES, getStays, staysOfType } from "../../lib/stays.js";
+
+const stays = await getStays();
+const allText = "Browse every PG, flat, studio room and lodge. Tap a card for photos, details and location.";
+---
+<Base
+  page="stays"
+  title="Our Stays — gopuhomestays"
+  description="All Gopu Homestays properties in Bengaluru: co-living PGs, ladies PG, flats, studio rooms and lodges, with photos and locations."
+>
+  <section class="page-hero" style="--hero-img:url('/images/g1/building.jpg')">
+    <div class="container">
+      <h1 id="stays-title">Our stays</h1>
+      <p id="stays-sub">{allText}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <!-- The script in src/scripts/site.js shows/hides cards when these buttons are used. -->
+      <div class="filters" id="filters">
+        <button data-type="all" data-title="Our stays" data-sub={allText} class="active">All stays ({stays.length})</button>
+        {TYPES.filter((t) => staysOfType(stays, t.id).length).map((t) => (
+          <button data-type={t.id} data-title={t.name} data-sub={`${t.blurb} Best for: ${t.bestFor.toLowerCase()}.`}>
+            {t.name} ({staysOfType(stays, t.id).length})
+          </button>
+        ))}
+      </div>
+      <div class="grid grid-3" id="stays-grid">
+        {stays.map((stay) => <StayCard stay={stay} />)}
+        <p class="empty" id="stays-empty" hidden>No stays to show here right now.</p>
+      </div>
+    </div>
+  </section>
+
+  <Cta title="Found a place you like?" text="One call books any of our properties." />
+</Base>
