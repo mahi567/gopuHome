@@ -20,6 +20,34 @@
   ],
   "photos": [
     {
+      "image": "/images/g3/double-room.jpg",
+      "caption": "Double cot room"
+    },
+    {
+      "image": "/images/g7/double-room.jpg",
+      "caption": "Double cot room"
+    },
+    {
+      "image": "/images/flats/fridge.jpg",
+      "caption": "Double-door fridge"
+    },
+    {
+      "image": "/images/flats/kitchen.jpg",
+      "caption": "Kitchen"
+    },
+    {
+      "image": "/images/flats/corridor-lift.jpg",
+      "caption": "Corridor and lift"
+    },
+    {
+      "image": "/images/flats/corridor.jpg",
+      "caption": "Corridor"
+    },
+    {
+      "image": "/images/flats/hot-water.jpg",
+      "caption": "Rooftop hot water and water tanks"
+    },
+    {
       "image": "/images/flat-2.jpg",
       "caption": ""
     }
