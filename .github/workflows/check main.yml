@@ -1,0 +1,61 @@
+
+name: GopuHome Build Check
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-check:
+    name: Astro Website Build Check
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout repository
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # Step 2: Setup Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      # Step 3: Install dependencies
+      - name: Install Dependencies
+        run: npm install
+
+      # Step 4: Check project configuration syntax
+      - name: Check Astro Configuration
+        run: node --check astro.config.mjs
+
+      # Step 5: Build Astro website
+      - name: Build Website
+        run: npm run build
+
+      # Step 6: Verify build output
+      - name: Verify Build Output
+        run: |
+          if [ ! -d "dist" ]; then
+            echo "ERROR: Build directory not found!"
+            exit 1
+          fi
+
+          echo "Build directory generated successfully!"
+          ls -lah dist/
+
+      # Step 7: Final build status
+      - name: Build Check Complete
+        run: echo "GopuHome build checks passed!"
