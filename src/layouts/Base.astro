@@ -3,7 +3,7 @@ import "../styles/global.css";
 import Icon from "../components/Icon.astro";
 import Logo from "../components/Logo.astro";
 import site from "../data/site.json";
-import { LOGO_SHAPES } from "../lib/icons.js";
+import { LOGO_SHAPES, LOGO_VIEWBOX } from "../lib/icons.js";
 import { TYPES, getStays, staysOfType } from "../lib/stays.js";
 
 const { title, description = site.tagline, page = "", image = "/images/hero.jpg" } = Astro.props;
@@ -18,7 +18,7 @@ const nav = [
 const favicon =
   "data:image/svg+xml," +
   encodeURIComponent(
-    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#1c1d1f"/><g color="#d9b25a" transform="translate(6 6) scale(0.8125)">${LOGO_SHAPES}</g></svg>`
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#fff7e6"/><svg x="7" y="12" width="50" height="40" viewBox="${LOGO_VIEWBOX}" style="color:#3d1402">${LOGO_SHAPES}</svg></svg>`
   );
 const ogImage = Astro.site ? new URL(image, Astro.site).href : image;
 ---
@@ -36,8 +36,8 @@ const ogImage = Astro.site ? new URL(image, Astro.site).href : image;
     <link rel="icon" type="image/svg+xml" href={favicon} />
     <!-- Apply the saved theme before the page paints, so there is no flash. -->
     <script is:inline>
-      try { document.documentElement.dataset.theme = localStorage.getItem("gopu-theme") || "dark"; }
-      catch (e) { document.documentElement.dataset.theme = "dark"; }
+      try { document.documentElement.dataset.theme = localStorage.getItem("gopu-theme") || "light"; }
+      catch (e) { document.documentElement.dataset.theme = "light"; }
     </script>
   </head>
   <body data-page={page} data-whatsapp={site.whatsapp}>
