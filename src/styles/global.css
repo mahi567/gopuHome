@@ -1054,3 +1054,14 @@ h1, h2, h3 { letter-spacing: -.015em; }
 .social-float a::after { animation-duration: 3.6s; opacity: .7; }
 .social-float .s-call { background: #dfa32e; }
 .social-float a:hover { transform: scale(1.06); }
+
+/* ---------- Phone: theme switch sits beside the menu button ---------- */
+#site-header .theme-toggle-m { display: none; }
+@media (max-width: 860px) {
+  #site-header .nav-links .theme-toggle { display: none; }
+  #site-header .theme-toggle-m { display: inline-grid; place-items: center; width: 40px; height: 40px; margin: 0 -6px 0 auto; border-radius: 12px; }
+  #site-header .theme-toggle-m span { display: none; }
+  #site-header .theme-toggle-m .i-sun { display: grid; }
+  :root[data-theme="light"] #site-header .theme-toggle-m .i-sun { display: none; }
+  :root[data-theme="light"] #site-header .theme-toggle-m .i-moon { display: grid; }
+}

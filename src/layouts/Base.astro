@@ -44,6 +44,9 @@ const ogImage = Astro.site ? new URL(image, Astro.site).href : image;
     <header id="site-header">
       <div class="container nav">
         <Logo />
+        <button class="theme-toggle theme-toggle-m" type="button" aria-label="Switch between light and dark theme" title="Switch theme">
+          <span class="i-sun"><Icon name="sun" /></span><span class="i-moon"><Icon name="moon" /></span>
+        </button>
         <button class="nav-toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
         <nav class="nav-links" aria-label="Main">
           {nav.map(([id, href, label]) => <a href={href} class:list={{ active: page === id }}>{label}</a>)}
