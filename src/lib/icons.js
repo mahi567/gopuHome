@@ -34,8 +34,9 @@ Object.assign(ICONS, {
   arrow: svg('<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>')
 });
 
-const LOGO_SHAPES = `<path d="M45.5 20.4 A18 18 0 1 0 50 34" fill="none" stroke="currentColor" stroke-width="5.5" stroke-linecap="round"/><rect x="30" y="34" width="22" height="7" rx="2" fill="currentColor"/><rect x="33" y="28" width="8" height="5" rx="2" fill="currentColor"/><line x1="50" y1="41" x2="50" y2="46" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>`;
+const LOGO_VIEWBOX = "0 0 362 295";
+const LOGO_SHAPES = `<defs><linearGradient id="gopu-gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color:var(--gold-3,#a86f10)"/><stop offset=".22" style="stop-color:var(--gold-1,#f6d977)"/><stop offset=".45" style="stop-color:var(--gold-2,#cf9620)"/><stop offset=".62" style="stop-color:var(--gold-hi,#ffeeb0)"/><stop offset=".8" style="stop-color:var(--gold-2,#cf9620)"/><stop offset="1" style="stop-color:var(--gold-4,#7a4a06)"/></linearGradient></defs><polygon points="5,142 180,7 357,142 180,30" fill="url(#gopu-gold)"/><g style="fill:var(--gold-pane,#f6c84a)"><rect x="162" y="56" width="17" height="17"/><rect x="183" y="56" width="17" height="17"/><rect x="162" y="77" width="17" height="17"/><rect x="183" y="77" width="17" height="17"/></g><path d="M212 139H96Q66 139 66 169V247Q66 277 96 277H206" fill="none" stroke="url(#gopu-gold)" stroke-width="22"/><path d="M130 214H297M206 203V288" fill="none" stroke="url(#gopu-gold)" stroke-width="22"/><rect x="285" y="60" width="24" height="228" fill="url(#gopu-gold)"/>`;
 ICONS.sun = svg('<circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.9 4.9 1.4 1.4"/><path d="m17.7 17.7 1.4 1.4"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.3 17.7-1.4 1.4"/><path d="m19.1 4.9-1.4 1.4"/>');
 ICONS.moon = svg('<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>');
 
-export { ICONS, LOGO_SHAPES };
+export { ICONS, LOGO_SHAPES, LOGO_VIEWBOX };
