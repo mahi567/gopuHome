@@ -7,23 +7,23 @@ import Marquee from "../components/Marquee.astro";
 import GoogleReviews from "../components/GoogleReviews.astro";
 import Stickers from "../components/Stickers.astro";
 import site from "../data/site.json";
-import { TYPES, getStays, staysOfType, coverOf } from "../lib/stays.js";
+import { TYPES, getStays, staysOfType } from "../lib/stays.js";
 
 const stays = await getStays();
 const groups = TYPES.map((t) => ({ type: t, list: staysOfType(stays, t.id) })).filter((g) => g.list.length);
-const featured = groups.map((g) => g.list[0]);
+const allText = "Pick a type below to see only those properties. Tap a card for photos, details and location.";
 ---
 <Base
   page="home"
-  title="gopuhomestays — PG, Co-living, Flats, Studio Rooms & Guest Rooms in Bengaluru"
-  description="Gopu Homestays: co-living PGs, ladies PG, flats, studio rooms and guest rooms. A trusted co-living brand with 1,000+ beds across Bengaluru and Hyderabad."
+  title="gopuhomestays — PG, Co-living, Flats & Guest Rooms in Bengaluru"
+  description="Gopu Homestays: co-living PGs, ladies PG, flats and guest rooms. A trusted co-living brand with 1,000+ beds across Bengaluru and Hyderabad."
 >
   <section class="hero">
     <div class="container">
       <div>
         <span class="eyebrow">Welcome to gopuhomestays</span>
         <h1>A comfortable stay for <em>every need</em></h1>
-        <p class="lead">Co-living PGs, a ladies PG, flats, studio rooms and guest rooms from a trusted co-living brand with over 1,000 beds across Bengaluru and Hyderabad.</p>
+        <p class="lead">Co-living PGs, a ladies PG, flats and guest rooms from a trusted co-living brand with over 1,000 beds across Bengaluru and Hyderabad.</p>
         <div class="hero-actions">
           <a class="btn btn-accent" href="#stay-types">Explore our stays</a>
           <a class="btn btn-light" href={`https://wa.me/${site.whatsapp}?text=${encodeURIComponent("Hi, I have an enquiry about Gopu Home Stay.")}`} target="_blank" rel="noopener"><Icon name="whatsapp" /><span>Enquire on WhatsApp</span></a>
@@ -57,40 +57,21 @@ const featured = groups.map((g) => g.list[0]);
   <section class="section" id="stay-types">
     <div class="container">
       <div class="section-head">
-        <span class="eyebrow">Types of stays</span>
-        <h2>Choose the stay that suits you</h2>
-        <p>Tap a category to see photos, locations and details of every property.</p>
+        <span class="eyebrow">Our properties</span>
+        <h2>List of properties</h2>
+        <p id="stays-sub">{allText}</p>
       </div>
-      <div class="grid grid-4">
-        {groups.map(({ type, list }, i) => (
-          <a class="type-tile" href={`/stays/?type=${type.id}`}>
-            {coverOf(list[0]) && <img src={coverOf(list[0])} alt="" loading="lazy" onerror="this.remove()" />}
-            <div class="tile-body">
-              <span class:list={["gloss-ico", { amber: i % 2 }]}><Icon name={type.icon} /></span>
-              <h3>{type.name}</h3>
-              <p>{type.blurb}</p>
-              <div class="tile-foot">
-                <span class="tile-count">{list.length} {list.length === 1 ? "property" : "properties"}</span>
-                <span class="tile-go"><Icon name="arrow" /></span>
-              </div>
-            </div>
-          </a>
+      <!-- The script in src/scripts/site.js shows/hides cards when these buttons are used. -->
+      <div class="filters" id="filters" data-inline>
+        <button data-type="all" data-sub={allText} class="active">All properties ({stays.length})</button>
+        {groups.map(({ type, list }) => (
+          <button data-type={type.id} data-sub={`${type.blurb} Best for: ${type.bestFor.toLowerCase()}.`}>{type.name} ({list.length})</button>
         ))}
       </div>
-    </div>
-  </section>
-
-  <section class="section section-alt">
-    <div class="container">
-      <div class="section-head">
-        <span class="eyebrow">Featured</span>
-        <h2>Popular places to stay</h2>
-        <p>One from each category. Tap a card for photos, map and booking.</p>
+      <div class="grid grid-3" id="stays-grid">
+        {stays.map((stay) => <StayCard stay={stay} />)}
+        <p class="empty" id="stays-empty" hidden>No properties to show here right now.</p>
       </div>
-      <div class="grid grid-4">
-        {featured.map((stay) => <StayCard stay={stay} />)}
-      </div>
-      <p class="center-action"><a class="btn btn-outline" href="/stays/">View all stays</a></p>
     </div>
   </section>
 

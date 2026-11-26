@@ -40,15 +40,17 @@ if (filters) {
     $("#stays-empty").hidden = shown > 0;
     $$("button[data-type]", filters).forEach((b) => b.classList.toggle("active", b.dataset.type === current));
     const active = $(`button[data-type="${current}"]`, filters);
-    $("#stays-title").textContent = active.dataset.title;
-    $("#stays-sub").textContent = active.dataset.sub;
+    const title = $("#stays-title");
+    const sub = $("#stays-sub");
+    if (title && active.dataset.title) title.textContent = active.dataset.title;
+    if (sub && active.dataset.sub) sub.textContent = active.dataset.sub;
   };
 
   filters.addEventListener("click", (e) => {
     const b = e.target.closest("button");
     if (!b) return;
     current = b.dataset.type;
-    history.replaceState(null, "", current === "all" ? location.pathname : "?type=" + current);
+    if (!("inline" in filters.dataset)) history.replaceState(null, "", current === "all" ? location.pathname : "?type=" + current);
     apply();
   });
   const wanted = new URLSearchParams(location.search).get("type");

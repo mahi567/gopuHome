@@ -9,7 +9,7 @@ const stays = defineCollection({
   schema: z.object({
     name: z.string(),
     code: z.string().optional().default(""),
-    type: z.enum(["flats", "hostels", "studios", "lodges"]),
+    type: z.enum(["flats", "hostels", "lodges"]),
     label: z.string().optional().default(""),
     order: z.number().optional().default(1000),
     location: z.string(),
