@@ -21,7 +21,7 @@ collections:
     label: Properties
     label_singular: Property
     description: >
-      Every PG, flat, studio room and guest room. Each one gets its own page on the site.
+      Every PG, flat and guest room. Each one gets its own page on the site.
     folder: src/content/stays
     format: json
     extension: json
@@ -40,7 +40,6 @@ collections:
         options:
           - { label: "PG & Co-living", value: hostels }
           - { label: Flats, value: flats }
-          - { label: Studio Rooms, value: studios }
           - { label: Guest Rooms, value: lodges }
       - { name: label, label: Photo badge, widget: string, required: false, hint: "Small tag on the photo, for example: Co-living PG or Ladies PG. Leave empty to use the category." }
       - { name: order, label: Position in lists, widget: number, value_type: int, default: 200, hint: "Lower numbers appear first." }

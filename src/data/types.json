@@ -17,14 +17,6 @@
       "bestFor": "Students & working professionals"
     },
     {
-      "id": "studios",
-      "name": "Studio Rooms",
-      "single": "Studio Room",
-      "icon": "sofa",
-      "blurb": "Compact, modern studio rooms with attached bath and kitchenette.",
-      "bestFor": "Couples & solo travellers"
-    },
-    {
       "id": "lodges",
       "name": "Guest Rooms",
       "single": "Guest Room",

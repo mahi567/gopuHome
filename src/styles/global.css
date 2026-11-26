@@ -1065,3 +1065,7 @@ h1, h2, h3 { letter-spacing: -.015em; }
   :root[data-theme="light"] #site-header .theme-toggle-m .i-sun { display: none; }
   :root[data-theme="light"] #site-header .theme-toggle-m .i-moon { display: grid; }
 }
+
+/* Logo mark sits close to the name */
+.brand, #site-header .brand, #site-footer .brand { gap: 2px; }
+.brand-mark svg { margin-right: -3px; }
