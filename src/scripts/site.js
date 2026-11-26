@@ -28,7 +28,8 @@ document.addEventListener("click", (e) => {
 const filters = $("#filters");
 if (filters) {
   const grid = $("#stays-grid");
-  let current = "all";
+  const inline = "inline" in filters.dataset; // Home page: nothing is shown until a type is chosen
+  let current = inline ? "" : "all";
 
   const apply = () => {
     let shown = 0;
@@ -37,9 +38,11 @@ if (filters) {
       card.hidden = !ok;
       if (ok) shown++;
     });
-    $("#stays-empty").hidden = shown > 0;
+    $("#stays-empty").hidden = shown > 0 || !current;
+    grid.hidden = !current;
     $$("button[data-type]", filters).forEach((b) => b.classList.toggle("active", b.dataset.type === current));
     const active = $(`button[data-type="${current}"]`, filters);
+    if (!active) return;
     const title = $("#stays-title");
     const sub = $("#stays-sub");
     if (title && active.dataset.title) title.textContent = active.dataset.title;
@@ -50,11 +53,11 @@ if (filters) {
     const b = e.target.closest("button");
     if (!b) return;
     current = b.dataset.type;
-    if (!("inline" in filters.dataset)) history.replaceState(null, "", current === "all" ? location.pathname : "?type=" + current);
+    if (!inline) history.replaceState(null, "", current === "all" ? location.pathname : "?type=" + current);
     apply();
   });
   const wanted = new URLSearchParams(location.search).get("type");
-  if (wanted && $(`button[data-type="${wanted}"]`, filters)) current = wanted;
+  if (!inline && wanted && $(`button[data-type="${wanted}"]`, filters)) current = wanted;
   apply();
 }
 

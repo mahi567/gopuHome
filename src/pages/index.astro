@@ -11,7 +11,6 @@ import { TYPES, getStays, staysOfType } from "../lib/stays.js";
 
 const stays = await getStays();
 const groups = TYPES.map((t) => ({ type: t, list: staysOfType(stays, t.id) })).filter((g) => g.list.length);
-const allText = "Pick a type below to see only those properties. Tap a card for photos, details and location.";
 ---
 <Base
   page="home"
@@ -57,15 +56,12 @@ const allText = "Pick a type below to see only those properties. Tap a card for 
   <section class="section" id="stay-types">
     <div class="container">
       <div class="section-head">
-        <span class="eyebrow">Our properties</span>
         <h2>List of properties</h2>
-        <p id="stays-sub">{allText}</p>
       </div>
       <!-- The script in src/scripts/site.js shows/hides cards when these buttons are used. -->
       <div class="filters" id="filters" data-inline>
-        <button data-type="all" data-sub={allText} class="active">All properties ({stays.length})</button>
         {groups.map(({ type, list }) => (
-          <button data-type={type.id} data-sub={`${type.blurb} Best for: ${type.bestFor.toLowerCase()}.`}>{type.name} ({list.length})</button>
+          <button data-type={type.id}>{type.name} ({list.length})</button>
         ))}
       </div>
       <div class="grid grid-3" id="stays-grid">
